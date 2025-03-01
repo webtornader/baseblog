@@ -1,0 +1,32 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Blog index{% endblock %}
+
+{% block body %}
+    <h1>Blog index</h1>
+
+    {{ include('blog/_form_filter.html.twig') }}
+    <br/>
+    {% for flash_error in app.flashes('error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+    {% for flash_success in app.flashes('success') %}
+        <div class="alert alert-success" role="alert">{{ flash_success }}</div>
+    {% endfor %}
+    <div class="row">
+        {% for blog in blogs %}
+            <div class="col-md-4">
+                <h2>{{ blog.title }}</h2>
+                <p>{{ blog.description }}</p>
+                <p><a class="btn btn-secondary" href="/blog/{{ blog.id }}" role="button">Подробнее &raquo;</a></p>
+            </div>
+        {% else %}
+            <div class="col-md-4">
+                    <td colspan="5">no records found</td>
+            </div>
+        {% endfor %}
+    </div>
+    {% if app.user %}
+        <a href="{{ path('app_blog_new') }}">Create new</a>
+    {% endif %}
+{% endblock %}

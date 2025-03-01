@@ -1,0 +1,48 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Blog index{% endblock %}
+
+{% block body %}
+    <h1>Blog index</h1>
+
+    {{ include('blog/_form_filter.html.twig') }}
+    <br/>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Text</th>
+                <th>User</th>
+                <th>Uniqueness</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for blog in blogs %}
+            <tr>
+                <td>{{ blog.id }}</td>
+                <td>{{ blog.title | length > 50 ? blog.title | slice(0, 50) ~ '...' : blog.title }}</td>
+                <td>{{ blog.description | length > 100 ? blog.description | slice(0, 100) ~ '...' : blog.description }}</td>
+                <td>{{ blog.text | length > 100 ? blog.text | slice(0, 100) ~ '...' : blog.text }}</td>
+                <td>{{ blog.user ? blog.user.email | length > 20 ? blog.user.email | slice(0, 20) ~ '...' : blog.user.email }}</td>
+                <td>{{ blog.uniqueness }}</td>
+                <td>
+                    <a href="{{ path('app_blog_show', {'id': blog.id}) }}">show</a>
+                    <a href="{{ path('app_blog_edit', {'id': blog.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="navigation">
+        {{ knp_pagination_render(blogs) }}
+    </div>
+    <a href="{{ path('app_blog_new') }}">Create new</a>
+{% endblock %}

@@ -5,3 +5,7 @@ controllers:
 kernel:
     resource: ../src/Kernel.php
     type: annotation
+    
+telegram_webhook:
+    path: /tg-webhook
+    controller: telegram_bot.webhook_controller

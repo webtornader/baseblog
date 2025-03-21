@@ -1,0 +1,7 @@
+telegram_bot:
+  http_client: psr18.guzzle_client
+  request_factory: psr17.guzzle_factory
+  stream_factory: psr17.guzzle_factory
+  api_token: 1111111111:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+#  webhook:
+#    url: https://localhost/tg-webhook

@@ -14,6 +14,10 @@ RUN apk update && apk add --no-cache \
     libpq-dev \
     && docker-php-ext-install pdo pdo_pgsql
 
+# MySQL
+RUN apk update && apk add --no-cache \
+    && docker-php-ext-install pdo pdo_mysql
+
 # Intl
 RUN docker-php-ext-configure intl \
     && docker-php-ext-install intl
